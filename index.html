@@ -137,11 +137,19 @@
     }
 
     flatpickr("#dataHora", {
-      enableTime: true,
-      dateFormat: "d/m/Y H:i",
-      time_24hr: true,
-      locale: "pt"
-    });
+  enableTime: true,
+  dateFormat: "d/m/Y H:i",
+  time_24hr: true,
+  locale: "pt",
+  minTime: "07:00",
+  maxTime: "17:00",
+  disable: [
+    function(date) {
+      // Bloqueia apenas domingos (0)
+      return (date.getDay() === 0);
+    }
+  ]
+});
 
     const form = document.getElementById('form-agendamento');
 
