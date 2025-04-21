@@ -99,24 +99,21 @@
       animation: pulse 1.8s infinite ease-in-out;
     }
 
-    .social-links {
+    .social {
       margin-top: 40px;
       text-align: center;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
     }
-
-    .social-links a {
+    .social a {
+      margin: 0 10px;
+      font-size: 24px;
       text-decoration: none;
-      color: #c94f7c;
-      font-weight: bold;
-      font-size: 15px;
-      transition: all 0.2s ease-in-out;
     }
 
-    .social-links a:hover {
-      color: #b03e6c;
+    .footer {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 12px;
+      color: #999;
     }
 
     @media (max-width: 480px) {
@@ -153,10 +150,14 @@
       </button>
     </div>
 
-    <div class="social-links">
-      <a href="https://wa.me/556681499177" target="_blank">📱 WhatsApp</a>
-      <a href="https://www.instagram.com/tessy_souza_unha?igsh=Z2ZndnQ1cGY1OXho" target="_blank">📸 Instagram</a>
-      <a href="https://www.facebook.com/share/19sLKR9dQs/" target="_blank">📘 Facebook</a>
+    <div class="social">
+      <a href="https://wa.me/556681499177" target="_blank">📱</a>
+      <a href="https://www.instagram.com/tessy_souza_unha" target="_blank">📸</a>
+      <a href="https://www.facebook.com/share/19sLKR9dQs/" target="_blank">📘</a>
+    </div>
+
+    <div class="footer">
+      Desenvolvido por <strong>raimudo_dev</strong>
     </div>
   </div>
 
@@ -167,7 +168,21 @@
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js')
-        .then(() => console.log('✅ Service Worker registrado com sucesso'));
+        .then(reg => {
+          console.log('✅ Service Worker registrado com sucesso');
+
+          // Força a atualização se nova versão for encontrada
+          reg.onupdatefound = () => {
+            const novaVersao = reg.installing;
+            novaVersao.onstatechange = () => {
+              if (novaVersao.state === 'installed' && navigator.serviceWorker.controller) {
+                if (confirm("🚀 Nova versão disponível! Deseja atualizar agora?")) {
+                  window.location.reload();
+                }
+              }
+            };
+          };
+        });
     }
 
     let bloqueiosFormatados = [];
@@ -216,7 +231,9 @@
       fetch('https://script.google.com/macros/s/AKfycbyWbg8wpxtQLoFWxZOvAu-DNTs_89UVmxkQNtaB3MxzrDowqO-sxULuCRl-NckeqKxAjw/exec', {
         method: 'POST',
         mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({ nome, dataHora, servico })
       })
       .then(() => {
