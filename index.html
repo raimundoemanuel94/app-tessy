@@ -6,9 +6,21 @@
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#c94f7c">
   <style>
-    body { font-family: Arial, sans-serif; padding: 20px; background: #fffafc; }
-    h2 { color: #c94f7c; }
-    form { max-width: 400px; margin: auto; display: flex; flex-direction: column; gap: 10px; }
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #fffafc;
+    }
+    h2 {
+      color: #c94f7c;
+    }
+    form {
+      max-width: 400px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
     input, select, button {
       padding: 10px;
       font-size: 16px;
@@ -63,23 +75,38 @@
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js')
-        .then(function() {
+        .then(function () {
           console.log('✅ Service Worker registrado com sucesso');
         });
     }
 
     const form = document.getElementById('form-agendamento');
 
-    form.addEventListener('submit', function(event) {
+    form.addEventListener('submit', function (event) {
       event.preventDefault();
 
       const nome = form.elements[0].value;
       const dataHora = form.elements[1].value;
       const servico = form.elements[2].value;
 
-      alert(`Agendamento registrado:\n\nNome: ${nome}\nData/Hora: ${dataHora}\nServiço: ${servico}`);
+      const dados = {
+        nome: nome,
+        dataHora: dataHora,
+        servico: servico
+      };
 
-      form.reset();
+      fetch('https://script.google.com/macros/s/AKfycbxjDFKVPNrd31TzXQf3wvfPle20UCJXZPmeRatnQ0a-B2oG3dCcnNJ5OTQViBSFawdzDg/exec', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dados)
+      }).then(() => {
+        alert(`Agendamento registrado:\n\nNome: ${nome}\nData/Hora: ${dataHora}\nServiço: ${servico}`);
+        form.reset();
+      }).catch(() => {
+        alert("❌ Erro ao enviar agendamento.");
+      });
     });
   </script>
 </body>
