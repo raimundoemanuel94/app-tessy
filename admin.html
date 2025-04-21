@@ -4,6 +4,21 @@
   <meta charset="UTF-8">
   <title>Admin - Agenda Tessy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <script>
+    const senhaCorreta = "tessy123"; // você pode mudar
+
+    if (!sessionStorage.getItem("liberadoAdmin")) {
+      const tentativa = prompt("Área restrita. Digite a senha:");
+      if (tentativa !== senhaCorreta) {
+        alert("❌ Acesso negado.");
+        window.location.href = "index.html"; // redireciona pro formulário
+      } else {
+        sessionStorage.setItem("liberadoAdmin", "ok");
+      }
+    }
+  </script>
+
   <style>
     * {
       box-sizing: border-box;
