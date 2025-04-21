@@ -1,8 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <title>App Tessy - Agendamento</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#c94f7c">
 
@@ -11,23 +13,39 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_blue.css">
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
-      padding: 20px;
       background: #fffafc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: start;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 420px;
     }
     h2 {
       color: #c94f7c;
+      text-align: center;
     }
     form {
-      max-width: 400px;
-      margin: auto;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
     }
     input, select, button {
-      padding: 10px;
+      padding: 12px;
       font-size: 16px;
       border: 1px solid #ccc;
       border-radius: 8px;
@@ -35,47 +53,69 @@
     button {
       background-color: #c94f7c;
       color: white;
+      font-weight: bold;
       cursor: pointer;
+    }
+    button:hover {
+      background-color: #b03e6c;
+    }
+    table {
+      margin-top: 30px;
+      width: 100%;
+      border-collapse: collapse;
+    }
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+    th, td {
+      padding: 10px;
+      text-align: center;
+    }
+    h3 {
+      margin-top: 40px;
+      color: #333;
+      text-align: center;
     }
   </style>
 </head>
 <body>
-  <h2>Agendamento com Tessy 💅</h2>
-  <form id="form-agendamento">
-    <input type="text" placeholder="Nome da cliente" required />
-    <input type="text" id="dataHora" placeholder="Selecione a data e hora" required />
-    <select required>
-      <option value="">Selecione o serviço</option>
-      <option value="unha">Unhas</option>
-      <option value="sobrancelha">Sobrancelha</option>
-      <option value="desencravar">Desencravar unha</option>
-    </select>
-    <button type="submit">Agendar</button>
-  </form>
+  <div class="container">
+    <h2>Agendamento com Tessy 💅</h2>
+    <form id="form-agendamento">
+      <input type="text" placeholder="Nome da cliente" required />
+      <input type="text" id="dataHora" placeholder="Selecione a data e hora" required />
+      <select required>
+        <option value="">Selecione o serviço</option>
+        <option value="unha">Unhas</option>
+        <option value="sobrancelha">Sobrancelha</option>
+        <option value="desencravar">Desencravar unha</option>
+      </select>
+      <button type="submit">Agendar</button>
+    </form>
 
-  <hr>
-  <h3>📅 Agenda da Semana</h3>
-  <table border="1" cellpadding="10" id="tabela-agenda">
-    <thead>
-      <tr>
-        <th>Nome</th>
-        <th>Serviço</th>
-        <th>Data/Hora</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Tessy</td>
-        <td>Unhas</td>
-        <td>2025-04-25 14:00</td>
-      </tr>
-      <tr>
-        <td>Bruna</td>
-        <td>Sobrancelha</td>
-        <td>2025-04-26 10:30</td>
-      </tr>
-    </tbody>
-  </table>
+    <h3>📅 Agenda da Semana</h3>
+    <table id="tabela-agenda">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Serviço</th>
+          <th>Data/Hora</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Tessy</td>
+          <td>Unhas</td>
+          <td>2025-04-25 14:00</td>
+        </tr>
+        <tr>
+          <td>Bruna</td>
+          <td>Sobrancelha</td>
+          <td>2025-04-26 10:30</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
   <!-- Flatpickr JS -->
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
