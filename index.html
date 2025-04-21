@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -13,9 +12,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_blue.css">
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -58,6 +55,11 @@
     button:hover {
       background-color: #b03e6c;
     }
+    #whatsappBtn {
+      display: none;
+      background-color: #25D366;
+      margin-top: 10px;
+    }
     table {
       margin-top: 30px;
       width: 100%;
@@ -75,13 +77,11 @@
       color: #333;
       text-align: center;
     }
-
     @media (max-width: 480px) {
       .container {
         padding: 15px;
         border-radius: 10px;
       }
-
       input, select, button {
         font-size: 15px;
       }
@@ -101,6 +101,7 @@
         <option value="desencravar">Desencravar unha</option>
       </select>
       <button type="submit">Agendar</button>
+      <button id="whatsappBtn">📲 Confirmar pelo WhatsApp</button>
     </form>
 
     <h3>📅 Agenda da Semana</h3>
@@ -137,11 +138,14 @@
         .then(() => console.log('✅ Service Worker registrado com sucesso'));
     }
 
-    // Carrega os horários ocupados do Google Sheets e bloqueia no calendário
+    let bloqueiosFormatados = [];
+
     fetch('https://opensheet.elk.sh/13DOG0PR-amOiFyLiGRMBqQOGSKDOQh116fNhvdbA0iE/Página1')
       .then(res => res.json())
       .then(data => {
         const horariosIndisponiveis = data.slice(1).map(row => row.DataHora);
+        bloqueiosFormatados = horariosIndisponiveis;
+
         const bloqueios = horariosIndisponiveis.map(str => {
           const [dia, hora] = str.split(" ");
           const [d, m, y] = dia.split("/");
@@ -172,21 +176,28 @@
       const dataHora = form.elements[1].value;
       const servico = form.elements[2].value;
 
+      if (bloqueiosFormatados.includes(dataHora)) {
+        alert("❌ Este horário já está reservado. Por favor, escolha outro.");
+        return;
+      }
+
       fetch('https://script.google.com/macros/s/AKfycbyWbg8wpxtQLoFWxZOvAu-DNTs_89UVmxkQNtaB3MxzrDowqO-sxULuCRl-NckeqKxAjw/exec', {
         method: 'POST',
         mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          nome,
-          dataHora,
-          servico
-        })
+        body: JSON.stringify({ nome, dataHora, servico })
       })
       .then(() => {
         alert(`✅ Agendamento registrado:\n\nNome: ${nome}\nData/Hora: ${dataHora}\nServiço: ${servico}`);
         form.reset();
+
+        const msg = `Olá, Tessy! Gostaria de confirmar meu agendamento:%0ANome: ${nome}%0AServiço: ${servico}%0AData/Hora: ${dataHora}`;
+        const whatsappURL = `https://wa.me/556681499177?text=${msg}`;
+        const btn = document.getElementById('whatsappBtn');
+        btn.style.display = 'block';
+        btn.onclick = () => window.open(whatsappURL, '_blank');
       })
       .catch((err) => {
         console.error("Erro:", err);
