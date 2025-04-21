@@ -13,6 +13,29 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_blue.css">
 
   <style>
+    <!-- sstyle -->
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+.admin-link {
+  display: block;
+  text-align: center;
+  margin-top: 30px;
+}
+.admin-link button {
+  background: #444;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+}
+.admin-link .emoji-lock {
+  animation: pulse 1.8s infinite ease-in-out;
+}
+
     * { box-sizing: border-box; }
     body {
       margin: 0;
@@ -138,8 +161,11 @@
     </table>
 
     <div class="admin-link">
-      <button onclick="acessarAdmin()">🔐  (Admin)</button>
+      <button onclick="acessarAdmin()">
+        <span class="emoji-lock">🔐</span>  (Admin)
+      </button>
     </div>
+    
   </div>
 
   <!-- Flatpickr JS -->
