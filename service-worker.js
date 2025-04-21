@@ -1,3 +1,7 @@
+self.addEventListener("install", (e) => {
+  self.skipWaiting(); // força ativação imediata
+});
+
 self.addEventListener('install', function(e) {
   e.waitUntil(
     caches.open('tessy-cache').then(function(cache) {
