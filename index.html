@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -136,20 +137,31 @@
         .then(() => console.log('✅ Service Worker registrado com sucesso'));
     }
 
-    flatpickr("#dataHora", {
-  enableTime: true,
-  dateFormat: "d/m/Y H:i",
-  time_24hr: true,
-  locale: "pt",
-  minTime: "07:00",
-  maxTime: "17:00",
-  disable: [
-    function(date) {
-      // Bloqueia apenas domingos (0)
-      return (date.getDay() === 0);
-    }
-  ]
-});
+    // Carrega os horários ocupados do Google Sheets e bloqueia no calendário
+    fetch('https://opensheet.elk.sh/13DOG0PR-amOiFyLiGRMBqQOGSKDOQh116fNhvdbA0iE/Página1')
+      .then(res => res.json())
+      .then(data => {
+        const horariosIndisponiveis = data.slice(1).map(row => row.DataHora);
+        const bloqueios = horariosIndisponiveis.map(str => {
+          const [dia, hora] = str.split(" ");
+          const [d, m, y] = dia.split("/");
+          const [h, i] = hora.split(":");
+          return new Date(`${y}-${m}-${d}T${h}:${i}`);
+        });
+
+        flatpickr("#dataHora", {
+          enableTime: true,
+          dateFormat: "d/m/Y H:i",
+          time_24hr: true,
+          locale: "pt",
+          minTime: "07:00",
+          maxTime: "17:00",
+          disable: [
+            date => date.getDay() === 0,
+            ...bloqueios
+          ]
+        });
+      });
 
     const form = document.getElementById('form-agendamento');
 
