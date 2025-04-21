@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin - Agenda Tessy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fffafc;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #c94f7c;
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+    th, td {
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #f9dbe4;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #c94f7c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background-color: #b03e6c;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Painel de Agendamentos 📋</h2>
+    <button onclick="carregarAgenda()">🔄 Atualizar Agenda</button>
+    <table id="tabela-agenda">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Data/Hora</th>
+          <th>Serviço</th>
+          <th>Data de Envio</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script>
+    function carregarAgenda() {
+      const url = 'https://opensheet.elk.sh/13DOG0PR-amOiFyLiGRMBqQOGSKDOQh116fNhvdbA0iE/Página1';
+      fetch(url)
+        .then(res => res.json())
+        .then(data => {
+          const tbody = document.querySelector("#tabela-agenda tbody");
+          tbody.innerHTML = "";
+          data.slice(1).reverse().forEach(row => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+              <td>${row.Nome}</td>
+              <td>${row.DataHora}</td>
+              <td>${row.Serviço}</td>
+              <td>${row['Data de Envio'] || '-'}</td>
+            `;
+            tbody.appendChild(tr);
+          });
+        })
+        .catch(err => {
+          alert("Erro ao carregar agendamentos.");
+          console.error(err);
+        });
+    }
+
+    window.onload = carregarAgenda;
+  </script>
+</body>
+</html>
