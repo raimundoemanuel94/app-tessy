@@ -74,6 +74,27 @@
       margin-top: 10px;
     }
 
+    table {
+      margin-top: 30px;
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: center;
+    }
+
+    h3 {
+      margin-top: 40px;
+      color: #333;
+      text-align: center;
+    }
+
     .admin-link {
       text-align: center;
       margin-top: 30px;
@@ -103,10 +124,27 @@
       margin-top: 40px;
       text-align: center;
     }
+
     .social a {
       margin: 0 10px;
-      font-size: 24px;
-      text-decoration: none;
+      font-size: 0;
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 0 8px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
+    }
+
+    .social a:hover {
+      transform: scale(1.1);
+    }
+
+    .social img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .footer {
@@ -164,9 +202,15 @@
     <button class="update-btn" onclick="window.location.reload()">🔄 Atualizar App</button>
 
     <div class="social">
-      <a href="https://wa.me/556681499177" target="_blank" title="WhatsApp">📱</a>
-      <a href="https://www.instagram.com/tessy_souza_unha/" target="_blank" title="Instagram">📱</a>
-      <a href="https://www.facebook.com/share/19sLKR9dQs/" target="_blank" title="Facebook">📱</a>
+      <a href="https://wa.me/556681499177" target="_blank" title="WhatsApp">
+        <img src="https://img.icons8.com/color/48/000000/whatsapp.png" alt="WhatsApp" />
+      </a>
+      <a href="https://www.instagram.com/tessy_souza_unha/" target="_blank" title="Instagram">
+        <img src="https://img.icons8.com/color/48/000000/instagram-new.png" alt="Instagram" />
+      </a>
+      <a href="https://www.facebook.com/share/19sLKR9dQs/" target="_blank" title="Facebook">
+        <img src="https://img.icons8.com/color/48/000000/facebook-new.png" alt="Facebook" />
+      </a>
     </div>
 
     <div class="footer">
