@@ -89,22 +89,24 @@
       const dataHora = form.elements[1].value;
       const servico = form.elements[2].value;
 
-      const dados = {
-        nome: nome,
-        dataHora: dataHora,
-        servico: servico
-      };
-
-      fetch('https://script.google.com/macros/s/AKfycbxjDFKVPNrd31TzXQf3wvfPle20UCJXZPmeRatnQ0a-B2oG3dCcnNJ5OTQViBSFawdzDg/exec', {
+      fetch('https://script.google.com/macros/s/AKfycbyWbg8wpxtQLoFWxZOvAu-DNTs_89UVmxkQNtaB3MxzrDowqO-sxULuCRl-NckeqKxAjw/exec', {
         method: 'POST',
+        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(dados)
-      }).then(() => {
-        alert(`Agendamento registrado:\n\nNome: ${nome}\nData/Hora: ${dataHora}\nServiço: ${servico}`);
+        body: JSON.stringify({
+          nome,
+          dataHora,
+          servico
+        })
+      })
+      .then(() => {
+        alert(`✅ Agendamento registrado:\n\nNome: ${nome}\nData/Hora: ${dataHora}\nServiço: ${servico}`);
         form.reset();
-      }).catch(() => {
+      })
+      .catch((err) => {
+        console.error("Erro:", err);
         alert("❌ Erro ao enviar agendamento.");
       });
     });
