@@ -4,86 +4,119 @@
   <meta charset="UTF-8">
   <title>Admin - Agenda Tessy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <script>
-    const senhaCorreta = "tessy123"; // você pode mudar
-
-    if (!sessionStorage.getItem("liberadoAdmin")) {
-      const tentativa = prompt("Área restrita. Digite a senha:");
-      if (tentativa !== senhaCorreta) {
-        alert("❌ Acesso negado.");
-        window.location.href = "index.html"; // redireciona pro formulário
-      } else {
-        sessionStorage.setItem("liberadoAdmin", "ok");
-      }
-    }
-  </script>
-
   <style>
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
+
     body {
       font-family: Arial, sans-serif;
-      background: #fffafc;
-      margin: 0;
-      padding: 20px;
+      background: #f5f5f5;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .menu-toggle {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: #c94f7c;
+      border: none;
+      color: white;
+      font-size: 24px;
+      padding: 8px 12px;
+      cursor: pointer;
+      border-radius: 6px;
+      z-index: 2;
+    }
+
+    .admin-container {
       display: flex;
-      justify-content: center;
+      height: 100%;
     }
-    .container {
-      background: white;
+
+    .sidebar {
+      width: 220px;
+      background: #c94f7c;
+      color: white;
+      display: flex;
+      flex-direction: column;
       padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
-      width: 100%;
-      max-width: 960px;
+      transition: transform 0.3s ease;
     }
-    h2 {
-      color: #c94f7c;
-      text-align: center;
+
+    .sidebar h2 {
+      font-size: 20px;
+      margin-bottom: 30px;
     }
-    .tabela-wrapper {
-      overflow-x: auto;
-      margin-top: 20px;
+
+    .sidebar a, .sidebar button {
+      color: white;
+      background: transparent;
+      border: none;
+      text-align: left;
+      padding: 10px 0;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
     }
+
+    .sidebar a:hover, .sidebar button:hover {
+      opacity: 0.8;
+    }
+
+    .content {
+      flex: 1;
+      padding: 30px;
+      background: white;
+      overflow-y: auto;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 600px;
+      margin-top: 20px;
     }
+
     th, td {
       padding: 12px;
       text-align: center;
       border: 1px solid #ddd;
     }
+
     th {
       background-color: #f9dbe4;
-      font-weight: bold;
     }
-    button {
-      margin-top: 10px;
-      padding: 10px 20px;
-      background-color: #c94f7c;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
+
+    .hide-sidebar .sidebar {
+      transform: translateX(-220px);
     }
-    button:hover {
-      background-color: #b03e6c;
+
+    @media (max-width: 768px) {
+      .sidebar {
+        position: absolute;
+        height: 100%;
+        z-index: 1;
+        left: 0;
+        top: 0;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h2>Painel de Agendamentos 📋</h2>
-    <button onclick="carregarAgenda()">🔄 Atualizar Agenda</button>
-    <div class="tabela-wrapper">
+  <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+  <div class="admin-container" id="adminContainer">
+    <div class="sidebar" id="sidebar">
+      <h2>Tessy Admin</h2>
+      <a href="#agenda">📋 Agenda</a>
+      <a href="#config">⚙️ Configurações</a>
+      <a href="#sair">🚪 Sair</a>
+      <button onclick="carregarAgenda()">🔄 Atualizar App</button>
+    </div>
+    <div class="content">
+      <h2>Painel de Agendamentos 📋</h2>
       <table id="tabela-agenda">
         <thead>
           <tr>
@@ -99,6 +132,10 @@
   </div>
 
   <script>
+    function toggleSidebar() {
+      document.getElementById("adminContainer").classList.toggle("hide-sidebar");
+    }
+
     function carregarAgenda() {
       const url = 'https://opensheet.elk.sh/13DOG0PR-amOiFyLiGRMBqQOGSKDOQh116fNhvdbA0iE/Página1';
       fetch(url)
