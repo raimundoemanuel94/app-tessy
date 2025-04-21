@@ -116,6 +116,17 @@
       color: #999;
     }
 
+    .update-btn {
+      display: block;
+      margin: 20px auto 0 auto;
+      padding: 10px 20px;
+      background: #c94f7c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
     @media (max-width: 480px) {
       .container {
         padding: 15px;
@@ -146,14 +157,16 @@
 
     <div class="admin-link">
       <button onclick="acessarAdmin()">
-        <span class="emoji-lock">🔐</span> <span style="font-weight: bold;">Área da Tessy</span>
+        <span class="emoji-lock">🔐</span> <span style="font-weight: bold;">Área da Tessy (Admin)</span>
       </button>
     </div>
 
+    <button class="update-btn" onclick="window.location.reload()">🔄 Atualizar App</button>
+
     <div class="social">
-      <a href="https://wa.me/556681499177" target="_blank">📱</a>
-      <a href="https://www.instagram.com/tessy_souza_unha" target="_blank">📸</a>
-      <a href="https://www.facebook.com/share/19sLKR9dQs/" target="_blank">📘</a>
+      <a href="https://wa.me/556681499177" target="_blank" title="WhatsApp">📱</a>
+      <a href="https://www.instagram.com/tessy_souza_unha/" target="_blank" title="Instagram">📸</a>
+      <a href="https://www.facebook.com/share/19sLKR9dQs/" target="_blank" title="Facebook">📘</a>
     </div>
 
     <div class="footer">
@@ -171,7 +184,6 @@
         .then(reg => {
           console.log('✅ Service Worker registrado com sucesso');
 
-          // Força a atualização se nova versão for encontrada
           reg.onupdatefound = () => {
             const novaVersao = reg.installing;
             novaVersao.onstatechange = () => {
