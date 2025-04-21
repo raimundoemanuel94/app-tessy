@@ -1,7 +1,6 @@
-<<<<<<< HEAD
 {
-  "name": "Agende com Tessy",
-  "short_name": "TessyApp",
+  "name": "Tessy Nails",
+  "short_name": "Tessy",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#fffafc",
@@ -19,25 +18,3 @@
     }
   ]
 }
-=======
-{
-  "name": "Agende com Tessy",
-  "short_name": "TessyApp",
-  "start_url": "./index.html",
-  "display": "standalone",
-  "background_color": "#fffafc",
-  "theme_color": "#c94f7c",
-  "icons": [
-    {
-      "src": "icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ]
-}
->>>>>>> 97cff90e0a1ca60bda18a3310bf4627e1c81ac3a
