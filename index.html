@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>App Tessy - Agendamento</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#c94f7c">
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #fffafc; }
+    h2 { color: #c94f7c; }
+    form { max-width: 400px; margin: auto; display: flex; flex-direction: column; gap: 10px; }
+    input, select, button {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    button {
+      background-color: #c94f7c;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h2>Agendamento com Tessy 💅</h2>
+  <form id="form-agendamento">
+    <input type="text" placeholder="Nome da cliente" required />
+    <input type="datetime-local" required />
+    <select required>
+      <option value="">Selecione o serviço</option>
+      <option value="unha">Unha</option>
+      <option value="cabelo">Cabelo</option>
+      <option value="sobrancelha">Sobrancelha</option>
+    </select>
+    <button type="submit">Agendar</button>
+  </form>
+
+  <hr>
+  <h3>📅 Agenda da Semana</h3>
+  <table border="1" cellpadding="10" id="tabela-agenda">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Serviço</th>
+        <th>Data/Hora</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Tessy</td>
+        <td>Unha</td>
+        <td>2025-04-25 14:00</td>
+      </tr>
+      <tr>
+        <td>Bruna</td>
+        <td>Cabelo</td>
+        <td>2025-04-26 10:30</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    // Service Worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(function() {
+          console.log('✅ Service Worker registrado com sucesso');
+        });
+    }
+
+    // Envio para o Google Sheets
+    const form = document.getElementById('form-agendamento');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const nome = form.elements[0].value;
+      const dataHora = form.elements[1].value;
+      const servico = form.elements[2].value;
+
+      const dados = {
+        nome: nome,
+        dataHora: dataHora,
+        servico: servico
+      };
+
+      fetch('https://script.google.com/macros/s/AKfycbxjDFKVPNrd31TzXQf3wvflPe20UCJXZPmeRatnQ0a-B2oG3dCcnNJ5OTQViBSFawdzDg/exec', {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dados)
+      }).then(() => {
+        alert(`Agendamento registrado com sucesso:\n\nNome: ${nome}\nData/Hora: ${dataHora}\nServiço: ${servico}`);
+        form.reset();
+      }).catch(() => {
+        alert('❌ Falha ao registrar agendamento.');
+      });
+    });
+  </script>
+</body>
+</html>
