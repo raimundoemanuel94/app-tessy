@@ -4,6 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tessy Nails - Agendamento</title>
+
+  <!-- Flatpickr CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_blue.css">
+
+  <!-- Font Awesome (para ícones sociais) -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
   <style>
     * {
       box-sizing: border-box;
@@ -89,7 +97,7 @@
     <h1>Bem-vinda ao Tessy Nails 💅</h1>
     <form id="agendamentoForm">
       <input type="text" placeholder="Nome da cliente" required>
-      <input type="text" placeholder="Data e Hora" required>
+      <input type="text" id="dataHora" placeholder="Data e Hora" required>
       <select required>
         <option value="">Selecione o Serviço</option>
         <option value="Unhas">Unhas</option>
@@ -98,10 +106,24 @@
       <button type="submit">Agendar</button>
     </form>
     <div class="social">
-      <a href="https://wa.me/556681499177" target="_blank">&#x1F4F1;</a>
-      <a href="https://www.instagram.com/tessy_souza_unha" target="_blank">&#x1F47E;</a>
+      <a href="https://wa.me/556681499177" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://www.instagram.com/tessy_souza_unha" target="_blank"><i class="fab fa-instagram"></i></a>
     </div>
     <footer>Desenvolvido por <strong>Raimundo_Dev</strong></footer>
   </div>
+
+  <!-- Flatpickr JS -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
+  <script>
+    flatpickr("#dataHora", {
+      enableTime: true,
+      dateFormat: "d/m/Y H:i",
+      time_24hr: true,
+      locale: "pt",
+      minTime: "08:00",
+      maxTime: "18:00"
+    });
+  </script>
 </body>
 </html>
