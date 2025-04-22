@@ -5,13 +5,15 @@
   <title>Agendamento com Tessy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Flatpickr CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 <body>
-  <!-- Botão para abrir/fechar o menu -->
   <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
 
   <div class="main-container">
-    <!-- Sidebar oculta por padrão -->
     <div class="sidebar" id="sidebar">
       <h2>Menu</h2>
       <a href="#">📅 Agendar</a>
@@ -20,12 +22,11 @@
       <a href="#">📞 Contato</a>
     </div>
 
-    <!-- Conteúdo principal -->
     <div class="content">
       <div class="form-container">
         <h1>Agendamento com Tessy 💅</h1>
         <input type="text" placeholder="Nome da cliente">
-        <input type="datetime-local" placeholder="Selecione a data e hora">
+        <input id="dataHora" type="text" placeholder="Selecione a data e hora">
         <select>
           <option selected>Selecione o serviço</option>
           <option value="unha">Unha</option>
@@ -34,7 +35,6 @@
         </select>
         <button>Agendar</button>
 
-        <!-- Redes sociais -->
         <div class="socials">
           <a href="https://wa.me/seunumero" target="_blank">
             <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
@@ -53,8 +53,17 @@
       </div>
     </div>
   </div>
-  </script>
+
+  <!-- Flatpickr JS -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script src="script.js"></script>
+  <script>
+    flatpickr("#dataHora", {
+      enableTime: true,
+      dateFormat: "d/m/Y H:i",
+      time_24hr: true,
+      locale: "pt"
+    });
+  </script>
 </body>
 </html>
-

@@ -5,7 +5,7 @@
   }
   
   body {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     background: #1a1a1a;
     color: #f0f0f0;
     height: 100vh;
@@ -85,7 +85,7 @@
     overflow-y: auto;
     transition: margin-left 0.5s ease;
   }
-
+  
   .sidebar.show ~ .content {
     margin-left: 220px;
   }
@@ -97,6 +97,7 @@
     box-shadow: 0 0 15px rgba(0,0,0,0.5);
     max-width: 400px;
     margin: auto;
+    animation: fadeIn 1s ease;
   }
   
   h1 {
@@ -122,6 +123,7 @@
     font-weight: bold;
     border: none;
     cursor: pointer;
+    transition: background 0.3s ease;
   }
   
   button:hover {
@@ -140,18 +142,8 @@
     height: 32px;
   }
   
-  @media (min-width: 768px) {
-    .sidebar {
-      position: relative;
-      transform: translateX(0);
-    }
-  
-    .menu-toggle {
-      display: none;
-    }
-  
-    .content {
-      margin-left: 220px;
-    }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
   }
   
