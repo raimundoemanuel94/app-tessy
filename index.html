@@ -7,6 +7,8 @@
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#7e2aa8">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <style>
     .social-icons {
       display: flex;
@@ -14,14 +16,16 @@
       gap: 20px;
       margin-top: 20px;
     }
-    .social-icons a img {
-      width: 40px;
-      height: 40px;
+    .social-icons a {
+      font-size: 24px;
+      color: #fff;
+      background: #7e2aa8;
+      padding: 10px;
       border-radius: 50%;
       box-shadow: 0 2px 8px rgba(0,0,0,0.2);
       transition: transform 0.3s ease;
     }
-    .social-icons a img:hover {
+    .social-icons a:hover {
       transform: scale(1.1);
     }
     footer {
@@ -52,15 +56,9 @@
     </form>
 
     <div class="social-icons">
-      <a href="https://wa.me/556681499177" target="_blank">
-        <img src="icon-whatsapp.png" alt="WhatsApp">
-      </a>
-      <a href="https://www.instagram.com/tessy_souza_unha/" target="_blank">
-        <img src="icon-instagram.png" alt="Instagram">
-      </a>
-      <a href="https://www.facebook.com/share/19sLKR9dQs/" target="_blank">
-        <img src="icon-facebook.png" alt="Facebook">
-      </a>
+      <a href="https://wa.me/556681499177" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://www.instagram.com/tessy_souza_unha/" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.facebook.com/share/19sLKR9dQs/" target="_blank"><i class="fab fa-facebook-f"></i></a>
     </div>
 
     <footer>
@@ -69,8 +67,5 @@
   </main>
 
   <script src="script.js"></script>
-  <script>
-    // Scripts de agendamento e service worker mantidos aqui
-  </script>
 </body>
 </html>
