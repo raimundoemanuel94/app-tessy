@@ -2,32 +2,106 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Tessy Nails - Agendamento</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#c94f7c">
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css">
+  <title>Tessy Nails - Agendamento</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      background: #fff;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      padding: 30px;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+    h1 {
+      color: #a64ac9;
+      margin-bottom: 20px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    input, select, button {
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    button {
+      background-color: #a64ac9;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background-color: #933bb4;
+    }
+    .social {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+    .social a {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #a64ac9;
+      color: white;
+      font-size: 20px;
+      transition: background 0.3s ease;
+    }
+    .social a:hover {
+      background: #933bb4;
+    }
+    footer {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #777;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
-    <h2>Bem-vinda ao Tessy Nails 💅</h2>
-    <form id="form-agendamento">
-      <input type="text" placeholder="Nome" required />
-      <input type="text" id="dataHora" placeholder="Data e Hora" required />
+    <h1>Bem-vinda ao Tessy Nails 💅</h1>
+    <form id="agendamentoForm">
+      <input type="text" placeholder="Nome da cliente" required>
+      <input type="text" placeholder="Data e Hora" required>
       <select required>
-        <option value="">Serviço</option>
-        <option value="unha">Unhas</option>
-        <option value="sobrancelha">Sobrancelha</option>
-        <option value="desencravar">Desencravar Unha</option>
+        <option value="">Selecione o Serviço</option>
+        <option value="Unhas">Unhas</option>
+        <option value="Sobrancelha">Sobrancelha</option>
       </select>
       <button type="submit">Agendar</button>
     </form>
-    <div class="social-links">
-      <a href="https://wa.me/556681499177" target="_blank">WhatsApp</a>
-      <a href="https://www.instagram.com/tessy_souza_unha/" target="_blank">Instagram</a>
+    <div class="social">
+      <a href="https://wa.me/556681499177" target="_blank">&#x1F4F1;</a>
+      <a href="https://www.instagram.com/tessy_souza_unha" target="_blank">&#x1F47E;</a>
     </div>
+    <footer>Desenvolvido por <strong>Raimundo_Dev</strong></footer>
   </div>
-  <script src="script.js"></script>
 </body>
 </html>
