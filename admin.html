@@ -19,7 +19,7 @@
     }
 
     .menu-toggle {
-      position: absolute;
+      position: fixed;
       top: 20px;
       left: 20px;
       background: #c94f7c;
@@ -29,7 +29,7 @@
       padding: 8px 12px;
       cursor: pointer;
       border-radius: 6px;
-      z-index: 2;
+      z-index: 3;
     }
 
     .admin-container {
@@ -38,13 +38,23 @@
     }
 
     .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
       width: 220px;
       background: #c94f7c;
       color: white;
       display: flex;
       flex-direction: column;
       padding: 20px;
+      transform: translateX(-220px);
       transition: transform 0.3s ease;
+      z-index: 2;
+    }
+
+    .sidebar.active {
+      transform: translateX(0);
     }
 
     .sidebar h2 {
@@ -68,10 +78,16 @@
     }
 
     .content {
+      margin-left: 0;
       flex: 1;
       padding: 30px;
       background: white;
       overflow-y: auto;
+      transition: margin-left 0.3s ease;
+    }
+
+    .content.shifted {
+      margin-left: 220px;
     }
 
     table {
@@ -90,24 +106,25 @@
       background-color: #f9dbe4;
     }
 
-    .hide-sidebar .sidebar {
-      transform: translateX(-220px);
-    }
-
     @media (max-width: 768px) {
       .sidebar {
-        position: absolute;
-        height: 100%;
-        z-index: 1;
-        left: 0;
-        top: 0;
+        width: 180px;
+        transform: translateX(-180px);
+      }
+
+      .sidebar.active {
+        transform: translateX(0);
+      }
+
+      .content.shifted {
+        margin-left: 180px;
       }
     }
   </style>
 </head>
 <body>
   <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
-  <div class="admin-container" id="adminContainer">
+  <div class="admin-container">
     <div class="sidebar" id="sidebar">
       <h2>Tessy Admin</h2>
       <a href="#agenda">📋 Agenda</a>
@@ -115,7 +132,7 @@
       <a href="#sair">🚪 Sair</a>
       <button onclick="carregarAgenda()">🔄 Atualizar App</button>
     </div>
-    <div class="content">
+    <div class="content" id="mainContent">
       <h2>Painel de Agendamentos 📋</h2>
       <table id="tabela-agenda">
         <thead>
@@ -133,7 +150,10 @@
 
   <script>
     function toggleSidebar() {
-      document.getElementById("adminContainer").classList.toggle("hide-sidebar");
+      const sidebar = document.getElementById("sidebar");
+      const content = document.getElementById("mainContent");
+      sidebar.classList.toggle("active");
+      content.classList.toggle("shifted");
     }
 
     function carregarAgenda() {
