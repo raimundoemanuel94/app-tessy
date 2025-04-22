@@ -13,7 +13,8 @@
 
     body {
       font-family: Arial, sans-serif;
-      background: #fff0f5;
+      background: #1a1a1a;
+      color: #f0f0f0;
       height: 100vh;
       overflow: hidden;
     }
@@ -22,19 +23,21 @@
       position: fixed;
       top: 20px;
       left: 20px;
-      background: #c94f7c;
+      background: #6c2dc7;
       border: none;
       color: white;
-      font-size: 24px;
-      padding: 8px 12px;
+      font-size: 26px;
+      padding: 10px 14px;
       cursor: pointer;
-      border-radius: 6px;
+      border-radius: 8px;
       z-index: 200;
-      transition: background 0.3s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+      transition: background 0.3s ease, transform 0.2s ease;
     }
 
     .menu-toggle:hover {
-      background: #a33a61;
+      background: #501ca4;
+      transform: scale(1.05);
     }
 
     .main-container {
@@ -45,7 +48,7 @@
 
     .sidebar {
       width: 220px;
-      background: #c94f7c;
+      background: #2d084d;
       color: white;
       display: flex;
       flex-direction: column;
@@ -57,7 +60,7 @@
       z-index: 150;
       transform: translateX(-100%);
       transition: transform 0.5s ease;
-      box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+      box-shadow: 2px 0 5px rgba(0,0,0,0.4);
     }
 
     .sidebar.show {
@@ -65,12 +68,12 @@
     }
 
     .sidebar h2 {
-      font-size: 20px;
+      font-size: 22px;
       margin-bottom: 30px;
     }
 
     .sidebar a {
-      color: white;
+      color: #f0f0f0;
       text-decoration: none;
       padding: 10px 0;
       font-size: 16px;
@@ -80,7 +83,7 @@
     }
 
     .sidebar a:hover {
-      color: #ffe0f0;
+      color: #d1aaff;
     }
 
     .content {
@@ -92,16 +95,16 @@
     }
 
     .form-container {
-      background: white;
+      background: #2b2b2b;
       padding: 30px;
       border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
       max-width: 400px;
       margin: auto;
     }
 
     h1 {
-      color: #c94f7c;
+      color: #b84dff;
       margin-bottom: 20px;
       text-align: center;
     }
@@ -111,12 +114,14 @@
       padding: 12px;
       margin-bottom: 15px;
       border-radius: 6px;
-      border: 1px solid #ccc;
+      border: 1px solid #444;
       font-size: 16px;
+      background: #1a1a1a;
+      color: #f0f0f0;
     }
 
     button {
-      background-color: #c94f7c;
+      background-color: #6c2dc7;
       color: white;
       font-weight: bold;
       border: none;
@@ -124,7 +129,7 @@
     }
 
     button:hover {
-      opacity: 0.9;
+      background-color: #501ca4;
     }
 
     .socials {
