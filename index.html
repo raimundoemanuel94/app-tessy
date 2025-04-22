@@ -2,67 +2,78 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Agendamento com Tessy</title>
+  <title>App Tessy - Agendamento</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#c94f7c">
   <link rel="stylesheet" href="style.css">
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <!-- Flatpickr CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 <body>
-  <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
-
-  <div class="main-container">
-    <div class="sidebar" id="sidebar">
-      <h2>Menu</h2>
-      <a href="#">📅 Agendar</a>
-      <a href="admin.html">🔐 Área Admin</a>
-      <a href="#">⚙️ Configurações</a>
-      <a href="#">📞 Contato</a>
-    </div>
-
-    <div class="content">
-      <div class="form-container">
-        <h1>Agendamento com Tessy 💅</h1>
-        <input type="text" placeholder="Nome da cliente">
-        <input id="dataHora" type="text" placeholder="Selecione a data e hora">
-        <select>
-          <option selected>Selecione o serviço</option>
-          <option value="unha">Unha</option>
-          <option value="sobrancelha">Sobrancelha</option>
-          <option value="cabelo">Cabelo</option>
-        </select>
-        <button>Agendar</button>
-
-        <div class="socials">
-          <a href="https://wa.me/seunumero" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
-          </a>
-          <a href="https://instagram.com/seuusuario" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt="Instagram">
-          </a>
-          <a href="https://facebook.com/seuusuario" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
-          </a>
-        </div>
-
-        <p style="text-align: center; margin-top: 20px; font-size: 12px; color: gray;">
-          Desenvolvido por raimudo_dev
-        </p>
-      </div>
-    </div>
+  <div id="sidebar" class="sidebar">
+    <h2>Tessy 💅</h2>
+    <a href="#agenda">📅 Agendar</a>
+    <a href="#social">🌐 Redes Sociais</a>
+    <a href="#admin" onclick="acessarAdmin()">🔐 Área da Tessy</a>
   </div>
 
-  <!-- Flatpickr JS -->
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <div class="main-content">
+    <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+    <div class="container">
+      <h2>Agendamento com Tessy 💅</h2>
+      <form id="form-agendamento">
+        <input type="text" placeholder="Nome da cliente" required />
+        <input type="text" id="dataHora" placeholder="Selecione a data e hora" required />
+        <select required>
+          <option value="">Selecione o serviço</option>
+          <option value="unha">Unhas</option>
+          <option value="sobrancelha">Sobrancelha</option>
+          <option value="desencravar">Desencravar unha</option>
+        </select>
+        <button type="submit">Agendar</button>
+        <button id="whatsappBtn">📲 Confirmar pelo WhatsApp</button>
+      </form>
+    </div>
+
+    <div class="social-links">
+      <a href="https://wa.me/556681499177" target="_blank"><img src="whatsapp-icon.png" alt="WhatsApp"></a>
+      <a href="https://www.instagram.com/tessy_souza_unha/" target="_blank"><img src="instagram-icon.png" alt="Instagram"></a>
+      <a href="https://www.facebook.com/share/19sLKR9dQs/" target="_blank"><img src="facebook-icon.png" alt="Facebook"></a>
+    </div>
+    <p class="creditos">Desenvolvido por <strong>Raimundo_Dev</strong></p>
+  </div>
+
   <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
   <script>
     flatpickr("#dataHora", {
       enableTime: true,
       dateFormat: "d/m/Y H:i",
       time_24hr: true,
-      locale: "pt"
+      locale: "pt",
+      minTime: "07:00",
+      maxTime: "17:00",
+      disable: [date => date.getDay() === 0]
+    });
+
+    function acessarAdmin() {
+      const senha = prompt("🔐 Digite a senha de administradora:");
+      if (senha === "tessy123") {
+        window.location.href = "admin.html";
+      } else if (senha) {
+        alert("❌ Senha incorreta!");
+      }
+    }
+
+    const form = document.getElementById('form-agendamento');
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      const nome = form.elements[0].value;
+      const dataHora = form.elements[1].value;
+      const servico = form.elements[2].value;
+      alert(`✅ Agendamento registrado:\n\nNome: ${nome}\nData/Hora: ${dataHora}\nServiço: ${servico}`);
+      form.reset();
     });
   </script>
 </body>
