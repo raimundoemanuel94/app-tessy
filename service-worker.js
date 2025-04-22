@@ -32,15 +32,18 @@
       margin-bottom: 30px;
     }
 
-    .sidebar a {
+    .sidebar a, .sidebar button {
       color: white;
-      text-decoration: none;
-      margin-bottom: 15px;
+      background: transparent;
+      border: none;
+      text-align: left;
+      padding: 10px 0;
+      font-size: 16px;
       font-weight: bold;
-      transition: opacity 0.3s;
+      cursor: pointer;
     }
 
-    .sidebar a:hover {
+    .sidebar a:hover, .sidebar button:hover {
       opacity: 0.8;
     }
 
@@ -66,21 +69,6 @@
     th {
       background-color: #f9dbe4;
     }
-
-    button {
-      margin-top: 10px;
-      padding: 10px 20px;
-      background-color: #c94f7c;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    button:hover {
-      background-color: #b03e6c;
-    }
   </style>
 </head>
 <body>
@@ -89,10 +77,10 @@
     <a href="#agenda">📋 Agenda</a>
     <a href="#config">⚙️ Configurações</a>
     <a href="#sair">🚪 Sair</a>
+    <button onclick="carregarAgenda()">🔄 Atualizar App</button>
   </div>
   <div class="content">
     <h2>Painel de Agendamentos 📋</h2>
-    <button onclick="carregarAgenda()">🔄 Atualizar Agenda</button>
     <table id="tabela-agenda">
       <thead>
         <tr>
