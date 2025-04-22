@@ -1,27 +1,53 @@
-function toggleSidebar() {
-  const sidebar = document.getElementById("sidebar");
-  sidebar.classList.toggle("show");
-}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agendamento com Tessy</title>
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#6a1b9a" />
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <!-- Barra Superior com Botão -->
+  <div class="topbar">
+    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+  </div>
 
-document.addEventListener('DOMContentLoaded', () => {
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('service-worker.js');
-  }
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <button class="close-btn" onclick="toggleSidebar()">×</button>
+    <a href="admin.html">🔒 Área da Tessy (Admin)</a>
+  </div>
 
-  const form = document.getElementById('form-agendamento');
-  const whatsappBtn = document.getElementById('whatsappBtn');
+  <!-- Conteúdo Principal -->
+  <div class="container">
+    <h1>Agendamento com Tessy 💅</h1>
+    <form id="form-agendamento">
+      <input type="text" placeholder="Nome da cliente" required />
+      <input type="text" id="dataHora" placeholder="Selecione a data e hora" required />
+      <select required>
+        <option value="">Selecione o serviço</option>
+        <option value="unha">Unhas</option>
+        <option value="sobrancelha">Sobrancelha</option>
+        <option value="desencravar">Desencravar unha</option>
+      </select>
+      <button type="submit">Agendar</button>
+      <button id="whatsappBtn" type="button">Confirmar pelo WhatsApp</button>
+    </form>
 
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    const nome = form.elements[0].value;
-    const dataHora = form.elements[1].value;
-    const servico = form.elements[2].value;
+    <!-- Redes Sociais -->
+    <div class="social-links">
+      <a href="https://wa.me/556681499177" target="_blank"><img src="whatsapp.png" alt="WhatsApp" /></a>
+      <a href="https://www.instagram.com/tessy_souza_unha" target="_blank"><img src="instagram.png" alt="Instagram" /></a>
+      <a href="https://www.facebook.com/share/19sLKR9dQs/" target="_blank"><img src="facebook.png" alt="Facebook" /></a>
+    </div>
 
-    alert(`✅ Agendamento registrado:\nNome: ${nome}\nData/Hora: ${dataHora}\nServiço: ${servico}`);
-
-    const msg = `Olá, Tessy! Gostaria de confirmar meu agendamento:%0ANome: ${nome}%0AServiço: ${servico}%0AData/Hora: ${dataHora}`;
-    const whatsappURL = `https://wa.me/556681499177?text=${msg}`;
-    whatsappBtn.style.display = 'block';
-    whatsappBtn.onclick = () => window.open(whatsappURL, '_blank');
-  });
-});
+    <!-- Rodapé -->
+    <footer>
+      Desenvolvido por <strong>Raimundo_Dev</strong>
+    </footer>
+  </div>
+</body>
+</html>
