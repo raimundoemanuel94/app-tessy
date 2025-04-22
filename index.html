@@ -1,53 +1,33 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Agendamento com Tessy</title>
-  <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#6a1b9a" />
-  <link rel="stylesheet" href="style.css" />
-  <script defer src="script.js"></script>
+  <meta charset="UTF-8">
+  <title>Tessy Nails - Agendamento</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#c94f7c">
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Barra Superior com Botão -->
-  <div class="topbar">
-    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
-  </div>
-
-  <!-- Sidebar -->
-  <div class="sidebar" id="sidebar">
-    <button class="close-btn" onclick="toggleSidebar()">×</button>
-    <a href="admin.html">🔒 Área da Tessy (Admin)</a>
-  </div>
-
-  <!-- Conteúdo Principal -->
   <div class="container">
-    <h1>Agendamento com Tessy 💅</h1>
+    <h2>Bem-vinda ao Tessy Nails 💅</h2>
     <form id="form-agendamento">
-      <input type="text" placeholder="Nome da cliente" required />
-      <input type="text" id="dataHora" placeholder="Selecione a data e hora" required />
+      <input type="text" placeholder="Nome" required />
+      <input type="text" id="dataHora" placeholder="Data e Hora" required />
       <select required>
-        <option value="">Selecione o serviço</option>
+        <option value="">Serviço</option>
         <option value="unha">Unhas</option>
         <option value="sobrancelha">Sobrancelha</option>
-        <option value="desencravar">Desencravar unha</option>
+        <option value="desencravar">Desencravar Unha</option>
       </select>
       <button type="submit">Agendar</button>
-      <button id="whatsappBtn" type="button">Confirmar pelo WhatsApp</button>
     </form>
-
-    <!-- Redes Sociais -->
     <div class="social-links">
-      <a href="https://wa.me/556681499177" target="_blank"><img src="whatsapp.png" alt="WhatsApp" /></a>
-      <a href="https://www.instagram.com/tessy_souza_unha" target="_blank"><img src="instagram.png" alt="Instagram" /></a>
-      <a href="https://www.facebook.com/share/19sLKR9dQs/" target="_blank"><img src="facebook.png" alt="Facebook" /></a>
+      <a href="https://wa.me/556681499177" target="_blank">WhatsApp</a>
+      <a href="https://www.instagram.com/tessy_souza_unha/" target="_blank">Instagram</a>
     </div>
-
-    <!-- Rodapé -->
-    <footer>
-      Desenvolvido por <strong>Raimundo_Dev</strong>
-    </footer>
   </div>
+  <script src="script.js"></script>
 </body>
 </html>
